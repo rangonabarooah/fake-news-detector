@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake News Detection AI</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="logo">🧠 FakeNewsAI</div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Fake News Detection Using AI</h1>
+      <p>Paste a news article or headline. The model classifies it as REAL or FAKE using TF-IDF and a Passive Aggressive classifier.</p>
+    </section>
+
+    <section class="card">
+      <h2>Try AI Detection</h2>
+      <textarea id="news" rows="7" placeholder="Enter any news article or headline..."></textarea>
+      <div class="row">
+        <button type="button" class="ghost" data-example="Scientists publish peer-reviewed study on crop yields in drought conditions.">Example REAL News</button>
+        <button type="button" class="ghost" data-example="SHOCKING: Government secretly replacing tap water with mind control chemicals!">Example FAKE News</button>
+        <button type="button" id="analyze">Analyze News</button>
+      </div>
+      <div id="result" class="result" hidden></div>
+    </section>
+
+    <section class="card">
+      <h2>Platform Features</h2>
+      <div class="features">
+        <div><h3>⚡ Real-Time Detection</h3><p>Instantly analyze news text.</p></div>
+        <div><h3>🤖 Machine Learning</h3><p>Trained text classifier.</p></div>
+        <div><h3>🔍 NLP Analysis</h3><p>TF-IDF features over the article's words.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>🧠 Fake News Detection AI · Developed using Flask, Machine Learning and NLP</p>
+    <p>© 2026 All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const textBox = document.getElementById("news");
+    const result = document.getElementById("result");
+
+    document.querySelectorAll("[data-example]").forEach((btn) => {
+      btn.addEventListener("click", () => { textBox.value = btn.dataset.example; });
+    });
+
+    document.getElementById("analyze").addEventListener("click", async () => {
+      const text = textBox.value.trim();
+      result.hidden = false;
+      result.className = "result";
+      if (!text) { result.textContent = "Please enter some news text."; return; }
+      result.textContent = "Analyzing...";
+      try {
+        const res = await fetch("/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+        });
+        const data = await res.json();
+        if (!res.ok) { result.textContent = data.error || "Something went wrong."; return; }
+        result.classList.add(data.prediction === "FAKE" ? "fake" : "real");
+        result.textContent = `Prediction: ${data.prediction}`;
+      } catch (err) {
+        result.textContent = "Could not reach the server.";
+      }
+    });
+  </script>
+</body>
+</html>
