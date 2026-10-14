@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}FAQ · Fake News Detection AI{% endblock %}
+{% block content %}
+<section class="block page-top">
+  <h1>Frequently Asked Questions</h1>
+  <details>
+    <summary>Does the model check whether a claim is true?</summary>
+    <p>No. It only looks at how the text is written and compares that to patterns in its training data.</p>
+  </details>
+  <details>
+    <summary>What input works best?</summary>
+    <p>Full article text works better than a short headline, because there are more words to weigh.</p>
+  </details>
+  <details>
+    <summary>Is my text stored?</summary>
+    <p>The app processes each request and returns a result. It does not save submitted text.</p>
+  </details>
+  <details>
+    <summary>Why does the page take a moment to load?</summary>
+    <p>The free hosting tier sleeps when no one has visited for a while. The first load wakes it up.</p>
+  </details>
+</section>
+{% endblock %}

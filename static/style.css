@@ -10,6 +10,12 @@ a { color: #a5b4fc; }
 .nav-links { display: flex; gap: 20px; }
 .nav-links a { color: #cbd5e1; text-decoration: none; font-size: 0.95rem; }
 .nav-links a:hover { color: #fff; }
+.nav-links a.active { color: #fff; font-weight: 600; border-bottom: 2px solid #6366f1; padding-bottom: 2px; }
+.page-top { margin-top: 16px; }
+.page-top h1 { font-size: 1.8rem; margin: 0 0 12px; }
+.link-card { text-decoration: none; color: inherit; display: block; }
+.link-card:hover { border-color: #6366f1; }
+.cta-row { margin-top: 20px; }
 .nav-toggle { display: none; }
 .nav-burger { display: none; cursor: pointer; width: 28px; height: 22px; position: relative; }
 .nav-burger span, .nav-burger span::before, .nav-burger span::after { display: block; position: absolute; left: 0; width: 28px; height: 3px; background: #e2e8f0; border-radius: 2px; content: ""; }

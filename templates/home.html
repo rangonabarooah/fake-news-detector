@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Fake News Detection Using AI</h1>
+  <p>Paste a news article or headline. A machine learning model classifies it as REAL or FAKE based on its wording, using TF-IDF features and a Passive Aggressive classifier.</p>
+  <a href="{{ url_for('detect') }}" class="cta">Try it now</a>
+</section>
+
+<section class="block">
+  <h2>Explore</h2>
+  <div class="features">
+    <a class="feature link-card" href="{{ url_for('features') }}"><h3>⚡ Features</h3><p>What the detector does and how it fits together.</p></a>
+    <a class="feature link-card" href="{{ url_for('how_it_works') }}"><h3>🧠 How It Works</h3><p>The four steps from raw text to a label.</p></a>
+    <a class="feature link-card" href="{{ url_for('about') }}"><h3>📘 About</h3><p>Training data, accuracy, and known limits.</p></a>
+    <a class="feature link-card" href="{{ url_for('faq') }}"><h3>❓ FAQ</h3><p>Quick answers to common questions.</p></a>
+  </div>
+</section>
+{% endblock %}

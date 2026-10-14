@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Fake News Detection AI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="{{ url_for('home') }}" class="logo">FakeNewsAI</a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
+      <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span></label>
+      <nav class="nav-links">
+        {% for endpoint, label in [('home', 'Home'), ('detect', 'Detect'), ('features', 'Features'), ('how_it_works', 'How It Works'), ('about', 'About'), ('faq', 'FAQ'), ('contact', 'Contact')] %}
+        <a href="{{ url_for(endpoint) }}" class="{{ 'active' if request.endpoint == endpoint else '' }}">{{ label }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>Fake News Detection AI · Developed using Flask, Machine Learning and NLP</p>
+    <p>© 2026 All Rights Reserved</p>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

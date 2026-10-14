@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Detect · Fake News Detection AI{% endblock %}
+{% block content %}
+<section class="card page-top">
+  <h1>Try AI Detection</h1>
+  <textarea id="news" rows="7" placeholder="Enter any news article or headline..."></textarea>
+  <div class="row">
+    <button type="button" class="ghost" data-example="Scientists publish peer-reviewed study on crop yields in drought conditions.">Example REAL News</button>
+    <button type="button" class="ghost" data-example="SHOCKING: Government secretly replacing tap water with mind control chemicals!">Example FAKE News</button>
+    <button type="button" id="analyze">Analyze News</button>
+  </div>
+  <div id="result" class="result" hidden></div>
+  <p class="note">The model judges writing patterns learned from its training data. It does not check facts, so treat the result as a hint, not a verdict.</p>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const textBox = document.getElementById("news");
+  const result = document.getElementById("result");
+
+  document.querySelectorAll("[data-example]").forEach((btn) => {
+    btn.addEventListener("click", () => { textBox.value = btn.dataset.example; });
+  });
+
+  document.getElementById("analyze").addEventListener("click", async () => {
+    const text = textBox.value.trim();
+    result.hidden = false;
+    result.className = "result";
+    if (!text) { result.textContent = "Please enter some news text."; return; }
+    result.textContent = "Analyzing...";
+    try {
+      const res = await fetch("/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      const data = await res.json();
+      if (!res.ok) { result.textContent = data.error || "Something went wrong."; return; }
+      result.classList.add(data.prediction === "FAKE" ? "fake" : "real");
+      result.textContent = `Prediction: ${data.prediction}`;
+    } catch (err) {
+      result.textContent = "Could not reach the server.";
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Features · Fake News Detection AI{% endblock %}
+{% block content %}
+<section class="block page-top">
+  <h1>Platform Features</h1>
+  <div class="features">
+    <div class="feature"><h3>⚡ Real-Time Detection</h3><p>Submit text and get a prediction back in a single request to the server.</p></div>
+    <div class="feature"><h3>🤖 Machine Learning</h3><p>A linear classifier trained on labeled news articles marked REAL or FAKE.</p></div>
+    <div class="feature"><h3>🔍 NLP Analysis</h3><p>Text is tokenized and weighted by TF-IDF, so common filler words count for less.</p></div>
+    <div class="feature"><h3>🛡️ Simple API</h3><p>Send JSON to <code>/predict</code> and receive the label and a confidence score.</p></div>
+    <div class="feature"><h3>📱 Works on Any Device</h3><p>The layout adapts to phones, tablets, and desktops.</p></div>
+    <div class="feature"><h3>🔓 Open Pipeline</h3><p>Training is a single script, so you can retrain on new data at any time.</p></div>
+  </div>
+  <p class="cta-row"><a href="{{ url_for('detect') }}" class="cta">Try the detector</a></p>
+</section>
+{% endblock %}

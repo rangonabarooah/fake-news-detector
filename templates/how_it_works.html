@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}How It Works · Fake News Detection AI{% endblock %}
+{% block content %}
+<section class="block page-top">
+  <h1>How It Works</h1>
+  <ol class="steps">
+    <li><h3>Clean the text</h3><p>The input is lowercased and common English stop words such as "the" and "and" are removed.</p></li>
+    <li><h3>Vectorize</h3><p>TF-IDF converts the words into numbers. Words that appear in many articles get less weight, and words that stand out get more.</p></li>
+    <li><h3>Classify</h3><p>A Passive Aggressive classifier looks at those numbers and decides which side of the line the article falls on: REAL or FAKE.</p></li>
+    <li><h3>Report</h3><p>The page shows the label, and the score shows how far the article sits from the decision line.</p></li>
+  </ol>
+</section>
+{% endblock %}

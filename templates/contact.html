@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Contact · Fake News Detection AI{% endblock %}
+{% block content %}
+<section class="block page-top">
+  <h1>Contact Us</h1>
+  <p>Have a question or feedback? Send a message and it will open in your email app.</p>
+  <form id="contact-form" class="contact-form">
+    <input type="text" id="c-name" placeholder="Your name" required>
+    <input type="email" id="c-email" placeholder="Your email" required>
+    <textarea id="c-msg" rows="4" placeholder="Your message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  document.getElementById("contact-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("c-name").value.trim();
+    const email = document.getElementById("c-email").value.trim();
+    const msg = document.getElementById("c-msg").value.trim();
+    const body = encodeURIComponent(`${msg}\n\nFrom: ${name} <${email}>`);
+    window.location.href = `mailto:hello@example.com?subject=${encodeURIComponent("FakeNewsAI feedback")}&body=${body}`;
+  });
+</script>
+{% endblock %}

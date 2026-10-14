@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}About · Fake News Detection AI{% endblock %}
+{% block content %}
+<section class="block page-top">
+  <h1>About This Project</h1>
+  <p>FakeNewsAI is a student project built with Flask, scikit-learn, and plain HTML, CSS, and JavaScript. It was trained on the Fake and Real News dataset, which contains labeled articles from news sites and from unreliable sources.</p>
+  <p>On a held-out test split, the model reached about 99.5% accuracy. That figure is measured on articles from the same source as the training data. Accuracy is likely lower on news from other outlets, other years, or other topics.</p>
+  <p>Known limits: the model cannot verify claims, it can be fooled by writing that imitates real news, and it has no knowledge of current events.</p>
+</section>
+{% endblock %}
